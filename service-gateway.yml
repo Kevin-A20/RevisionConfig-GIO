@@ -1,11 +1,9 @@
 server:
   port: 8080
-
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8099/eureka/
-
+      defaultZone: http://localhost:9010/eureka/
 spring:
   cloud:
     gateway:
@@ -13,19 +11,19 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: user-service
-          uri: lb://user-service
+        - id: service-movies
+          uri: lb://service-movies
           predicates:
-            - Path=/users/**
-        - id: movie-service
-          uri: lb://movie-service
+            - Path=/store/v1/movies/**
+        - id: service-showtime
+          uri: lb://service-showtime
           predicates:
-            - Path=/movies/**
-        - id: showtime-service
-          uri: lb://showtime-service
+            - Path=/store/v1/showtime/**
+        - id: service-users
+          uri: lb://service-users
           predicates:
-            - Path=/showtimes/**
-        - id: booking-service
-          uri: lb://booking-service
+            - Path=/store/v1/users/**
+        - id: service-bookings
+          uri: lb://service-bookings
           predicates:
-            - Path=/bookings/**
+            - Path=/store/v1/bookings/**
